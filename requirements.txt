@@ -1,9 +1,9 @@
 coverage==5.4
-Django==3.1.7
+Django==3.1.8
 django-appconf==1.0.4
 django-autoslug==1.9.8
 django-compressor==2.4
-django-debug-toolbar==3.2
+django-debug-toolbar==3.2.1
 django-haystack==3.0
 django-ipware==3.0.2
 django-mdeditor==0.1.18
@@ -37,6 +37,6 @@ rcssmin==1.0.6
 requests==2.25.1
 rjsmin==1.1.0
 six==1.15.0
-urllib3==1.26.3
+urllib3==1.26.4
 WeRoBot==1.13.1
 Whoosh==2.7.4
