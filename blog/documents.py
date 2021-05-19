@@ -28,8 +28,8 @@ class ElapsedTimeDocument(Document):
     url = Text()
     time_taken = Long()
     log_datetime = Date()
-    type = Text(analyzer='ik_max_word')
-    useragent = Text()
+    useragent = Text(analyzer='ik_max_word', search_analyzer='ik_smart')
+    ip = Text()
 
     class Index:
         name = 'performance'
@@ -43,9 +43,14 @@ class ElapsedTimeDocument(Document):
 
 
 class ElaspedTimeDocumentManager():
+    @staticmethod
+    def delete_index():
+        from elasticsearch import Elasticsearch
+        es = Elasticsearch(settings.ELASTICSEARCH_DSL['default']['hosts'])
+        es.indices.delete(index='performance', ignore=[400, 404])
 
     @staticmethod
-    def create(url, time_taken, log_datetime, type, useragent):
+    def create(url, time_taken, log_datetime, useragent, ip):
         # if not hasattr(ElaspedTimeDocumentManager, 'mapping_created'):
         #     ElapsedTimeDocument.init()
         #     setattr(ElaspedTimeDocumentManager, 'mapping_created', True)
@@ -58,8 +63,7 @@ class ElaspedTimeDocumentManager():
             url=url,
             time_taken=time_taken,
             log_datetime=log_datetime,
-            type=type,
-            useragent=useragent)
+            useragent=useragent, ip=ip)
         doc.save()
 
 
